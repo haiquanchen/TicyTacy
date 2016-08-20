@@ -1,3 +1,10 @@
+/*
+ * Distributed as part of Ticy Tacy. Ticy Tacy is a Tic-Tac-Toe game
+ * made by Ashrynn Macke (Flutterflies). Ticy Tacy is released under
+ * the MIT license. You should have received a copy of the MIT license
+ * with this code, if not please find it here:
+ * http://flutterflies.net/license.html
+ */
 package net.flutterflies.ticytacy.display;
 
 import net.flutterflies.ticytacy.TicyTacy;
@@ -10,14 +17,33 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 /**
- * Created by ashrynn on 8/4/16.
+ * Display manager class for TicyTacy.
+ *
+ * @author Ashrynn Macke | Flutterflies
+ * @since 0.1.0
  */
 public class TTDisplay extends JFrame {
 
-    private JPanel metaPanel;
-    private JPanel boardGrid;
-    private TTListener listener;
+    /**
+     * A JPanel used to display meta information about the game board.
+     */
+    private final JPanel metaPanel;
 
+    /**
+     * A JPanel used to display the main grid of the game board.
+     */
+    private final JPanel boardGrid;
+
+    /**
+     * The listener responsible for handling the game controls.
+     */
+    private final TTListener listener;
+
+    /**
+     * Construct a new instance of the TicyTacy display manager.
+     *
+     * @param ticyTacy Instance of the main Game class.
+     */
     public TTDisplay(TicyTacy ticyTacy) {
         super("Ticy Tacy");
         listener = new TTListener(ticyTacy);
@@ -38,6 +64,11 @@ public class TTDisplay extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Update the display of the board to match the board's current state.
+     *
+     * @param board the current instance of the Game board.
+     */
     public void updateBoardDisplay(TTBoard board) {
         makeBoardMeta(board);
         makeBoardGrid(board);
@@ -46,6 +77,12 @@ public class TTDisplay extends JFrame {
         repaint();
     }
 
+    /**
+     * MAke the meta panel for the board. this panel contains information like
+     * the turn number, the number of cells each player has, and which players turn it is.
+     *
+     * @param board the current instance of the Game board.
+     */
     private void makeBoardMeta(TTBoard board) {
         JLabel turnNumber = new JLabel();
         JLabel blueCells = new JLabel();
@@ -70,6 +107,11 @@ public class TTDisplay extends JFrame {
         metaPanel.add(purpleCells);
     }
 
+    /**
+     * Create the visual representation of the board grid.
+     *
+     * @param board The board to base the gird off.
+     */
     private void makeBoardGrid(TTBoard board) {
         boardGrid.removeAll();
         boardGrid.setLayout(new GridLayout(board.getSize(), board.getSize()));
@@ -87,6 +129,12 @@ public class TTDisplay extends JFrame {
         }
     }
 
+    /**
+     * Return a color based on the given cells owner.
+     *
+     * @param boardCell The cell to color.
+     * @return The color for the cell.
+     */
     private Color getButtonColor(TTCell boardCell) {
         Color color;
         if(boardCell.getOwner() == TTCell.BLUE_PLAYER) {

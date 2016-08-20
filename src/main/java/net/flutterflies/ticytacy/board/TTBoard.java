@@ -1,22 +1,61 @@
+/*
+ * Distributed as part of Ticy Tacy. Ticy Tacy is a Tic-Tac-Toe game
+ * made by Ashrynn Macke (Flutterflies). Ticy Tacy is released under
+ * the MIT license. You should have received a copy of the MIT license
+ * with this code, if not please find it here:
+ * http://flutterflies.net/license.html
+ */
 package net.flutterflies.ticytacy.board;
 
 import net.flutterflies.ticytacy.board.init.ITTInitializer;
 import net.flutterflies.ticytacy.board.init.TTBlankInitializer;
 
 /**
- * Created by ashrynn on 8/4/16.
+ * Class used to represent a Ticy Tacy game board.
+ *
+ * @author Ashrynn Macke | Flutterflies
+ * @since 0.1.0
  */
 public class TTBoard {
 
-    private TTCell[][] board;
+    /**
+     * An array of {@link TTCell} that makes up the actual board.
+     */
+    private final TTCell[][] board;
+
+    /**
+     * The current turn number, an odd turn number represents
+     * that is is the blue player's turn, and even turn number
+     * represents that it is the purple player's turn.
+     */
     private int turnNumber;
+
+    /**
+     * The current number of blue cells on the board.
+     */
     private int blueCells;
+
+    /**
+     * The current number of purple cells on the board.
+     */
     private int purpleCells;
 
+    /**
+     * Construct a new instance of the Ticy Tacy Board with a
+     * blank initializer.
+     */
     public TTBoard() {
         this(new TTBlankInitializer());
     }
 
+    /**
+     * Construct a new instance of the Ticy Tacy Board with
+     * a provided {@link ITTInitializer} to initialize the
+     * board.
+     *
+     * @param initializer The Initializer to use when creating
+     *                    the board.
+     */
     public TTBoard(ITTInitializer initializer) {
         board = initializer.initBoard();
         turnNumber = 1;
@@ -24,6 +63,9 @@ public class TTBoard {
         purpleCells = 0;
     }
 
+    /**
+     * Reset the current game board.
+     */
     public void reset() {
         turnNumber = 1;
         blueCells = 0;
@@ -36,7 +78,14 @@ public class TTBoard {
         }
     }
 
-    public void updateBoard(int cellX, int cellY, int newOwner) {
+    /**
+     * Update the owner of a given cell on the board.
+     *
+     * @param cellI    the vertical placement of the cell to update.
+     * @param cellJ    The horizontal placement of the cell to update.
+     * @param newOwner The new owner of the cell.
+     */
+    public void updateBoard(int cellI, int cellJ, int newOwner) {
         blueCells = 0;
         purpleCells = 0;
 
@@ -44,7 +93,7 @@ public class TTBoard {
             turnNumber++;
         }
 
-        board[cellX][cellY].setOwner(newOwner);
+        board[cellI][cellJ].setOwner(newOwner);
 
         for(int i = 0; i < getSize(); i++) {
             for(int j = 0; j < getSize(); j++) {
@@ -58,6 +107,14 @@ public class TTBoard {
         }
     }
 
+    /**
+     * Check the current state of the board to see if the given player
+     * has won the game. Winning conditions are three cells in a row
+     * either horizontally, vertically, or diagonally.
+     *
+     * @param playerToCheck The player to check the win condition for.
+     * @return True if a player has won.
+     */
     public boolean checkWinCondition(int playerToCheck) {
         boolean hasWon = false;
 
@@ -97,22 +154,50 @@ public class TTBoard {
         return hasWon;
     }
 
+    /**
+     * Return the size of the game board. The game board will always
+     * be square so the length and width will always be the same.
+     *
+     * @return The size of the game board.
+     */
     public int getSize() {
         return board.length;
     }
 
-    public TTCell getCell(int x, int y) {
-        return board[x][y];
+    /**
+     * Retrieve a cell from the game board at the given coordinates.
+     *
+     * @param i The Vertical position of the cell.
+     * @param j The Horizontal position of the cell.
+     * @return The cell at the given coordinates.
+     */
+    public TTCell getCell(int i, int j) {
+        return board[i][j];
     }
 
+    /**
+     * Get the number of blue cells present in the game board.
+     *
+     * @return The number of blue cells.
+     */
     public int getBlueCells() {
         return blueCells;
     }
 
+    /**
+     * Get the number of purple cells present in the game board.
+     *
+     * @return The number of purple cells.
+     */
     public int getPurpleCells() {
         return purpleCells;
     }
 
+    /**
+     * Get the current turn number for the game.
+     *
+     * @return The current turn of the game.
+     */
     public int getTurnNumber() {
         return turnNumber;
     }

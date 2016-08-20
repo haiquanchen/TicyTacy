@@ -7,6 +7,24 @@
     <groupId>TicyTacy</groupId>
     <artifactId>net.flutterflies.ticytacy</artifactId>
     <version>0.1.0</version>
+    <name>Ticy Tacy</name>
+    <description>A Slight variation on the classic game Tic-Tac-Toe.</description>
+
+    <contributors>
+        <contributor>
+            <name>Ashrynn Macke</name>
+            <email>ashrynn@flutterflies.net</email>
+            <url>http://flutterflies.net</url>
+        </contributor>
+    </contributors>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
