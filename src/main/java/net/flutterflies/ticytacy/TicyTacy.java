@@ -10,6 +10,7 @@ package net.flutterflies.ticytacy;
 import net.flutterflies.ticytacy.board.TTBoard;
 import net.flutterflies.ticytacy.board.init.TTBlankInitializer;
 import net.flutterflies.ticytacy.board.init.TTCrossInitializer;
+import net.flutterflies.ticytacy.board.init.TTOppositeInitializer;
 import net.flutterflies.ticytacy.board.init.TTRandomInitializer;
 import net.flutterflies.ticytacy.display.TTDisplay;
 
@@ -48,6 +49,9 @@ public class TicyTacy {
         }
         else if(args.contains("crossed")) {
             board = new TTBoard(new TTCrossInitializer());
+        }
+        else if(args.contains("opposites")) {
+            board = new TTBoard(new TTOppositeInitializer());
         }
         else {
             board = new TTBoard();
