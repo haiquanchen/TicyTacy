@@ -9,6 +9,7 @@ package net.flutterflies.ticytacy;
 
 import net.flutterflies.ticytacy.board.TTBoard;
 import net.flutterflies.ticytacy.board.init.TTBlankInitializer;
+import net.flutterflies.ticytacy.board.init.TTCrossInitializer;
 import net.flutterflies.ticytacy.board.init.TTRandomInitializer;
 import net.flutterflies.ticytacy.display.TTDisplay;
 
@@ -44,6 +45,9 @@ public class TicyTacy {
         }
         else if(args.contains("random")) {
             board = new TTBoard(new TTRandomInitializer());
+        }
+        else if(args.contains("crossed")) {
+            board = new TTBoard(new TTCrossInitializer());
         }
         else {
             board = new TTBoard();
