@@ -21,7 +21,12 @@ public class TTBoard {
     /**
      * An array of {@link TTCell} that makes up the actual board.
      */
-    private final TTCell[][] board;
+    private TTCell[][] board;
+
+    /**
+     * The initializer being used to create the board.
+     */
+    private ITTInitializer initializer;
 
     /**
      * The current turn number, an odd turn number represents
@@ -53,10 +58,11 @@ public class TTBoard {
      * a provided {@link ITTInitializer} to initialize the
      * board.
      *
-     * @param initializer The Initializer to use when creating
+     * @param initParam The Initializer to use when creating
      *                    the board.
      */
-    public TTBoard(ITTInitializer initializer) {
+    public TTBoard(ITTInitializer initParam) {
+        initializer = initParam;
         board = initializer.initBoard();
         turnNumber = 1;
         blueCells = 0;
@@ -71,11 +77,7 @@ public class TTBoard {
         blueCells = 0;
         purpleCells = 0;
 
-        for(int i = 0; i < getSize(); i++) {
-            for(int j = 0; j < getSize(); j++) {
-                getCell(i, j).setOwner(TTCell.NO_PLAYER);
-            }
-        }
+        board = initializer.initBoard();
     }
 
     /**

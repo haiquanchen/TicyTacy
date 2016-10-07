@@ -8,7 +8,12 @@
 package net.flutterflies.ticytacy;
 
 import net.flutterflies.ticytacy.board.TTBoard;
+import net.flutterflies.ticytacy.board.init.TTBlankInitializer;
+import net.flutterflies.ticytacy.board.init.TTRandomInitializer;
 import net.flutterflies.ticytacy.display.TTDisplay;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Main class for Ticy Tacy. Contains the entry point for the program
@@ -33,8 +38,17 @@ public class TicyTacy {
     /**
      * Constructor for the TicyTacy class.
      */
-    private TicyTacy() {
-        board = new TTBoard();
+    private TicyTacy(List<String> args) {
+        if(args.contains("blank")) {
+            board = new TTBoard(new TTBlankInitializer());
+        }
+        else if(args.contains("random")) {
+            board = new TTBoard(new TTRandomInitializer());
+        }
+        else {
+            board = new TTBoard();
+        }
+
         display = new TTDisplay(this);
     }
 
@@ -62,6 +76,6 @@ public class TicyTacy {
      * @param args the program arguments
      */
     public static void main(String[] args) {
-        new TicyTacy();
+        new TicyTacy(Arrays.asList(args));
     }
 }
