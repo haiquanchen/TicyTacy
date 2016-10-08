@@ -11,34 +11,42 @@ import net.flutterflies.ticytacy.board.TTCell;
 
 /**
  * Class containing an implementation of {@link ITTInitializer}.
- * Initializes the board by setting all cells to have no owner.
+ * Initializes the board so that each player starts with one cell.
+ * The cells are located in opposite corners of the board as follows:
+ * <pre>
+ *     [x] [ ] [ ]
+ *     [ ] [ ] [ ]
+ *     [ ] [ ] [o]
+ * </pre>
  *
  * @author Ashrynn Macke | Flutterflies
- * @since 0.1.0
+ * @since 0.2.0
  */
-public class TTBlankInitializer implements ITTInitializer {
+public class TTOppositeInitializer extends TTBlankInitializer {
 
     /**
      * Construct a new instance of the initializer.
      */
-    public TTBlankInitializer() {
+    public TTOppositeInitializer() {
     }
 
     /**
      * Initialize the cells of the board. Set each cell on the board
-     * to be equal to a new {@link TTCell} with an owner of no player.
+     * to be equal to a new {@link TTCell} follow this exact layout.
+     * <pre>
+     *     [x] [ ] [ ]
+     *     [ ] [ ] [ ]
+     *     [ ] [ ] [o]
+     * </pre>
      *
      * @return The 3x3 grid of initialized cells.
      */
     @Override
     public TTCell[][] initBoard() {
-        TTCell[][] board = new TTCell[3][3];
+        TTCell[][] board = super.initBoard();
 
-        for(int i = 0; i < board.length; i++) {
-            for(int j = 0; j < board[i].length; j++) {
-                board[i][j] = new TTCell();
-            }
-        }
+        board[0][0] = new TTCell(TTCell.BLUE_PLAYER);
+        board[2][2] = new TTCell(TTCell.PURPLE_PLAYER);
 
         return board;
     }

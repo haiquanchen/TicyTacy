@@ -75,5 +75,3 @@ public class TTCell {
         return owner;
     }
 }
-
-//032216
