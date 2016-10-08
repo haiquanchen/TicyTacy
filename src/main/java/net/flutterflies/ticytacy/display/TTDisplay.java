@@ -11,6 +11,7 @@ import net.flutterflies.ticytacy.TicyTacy;
 import net.flutterflies.ticytacy.board.TTBoard;
 import net.flutterflies.ticytacy.board.TTCell;
 import net.flutterflies.ticytacy.listeners.TTListener;
+import net.flutterflies.ticytacy.board.TTCell.Owners;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -137,10 +138,10 @@ public class TTDisplay extends JFrame {
      */
     private Color getButtonColor(TTCell boardCell) {
         Color color;
-        if(boardCell.getOwner() == TTCell.BLUE_PLAYER) {
+        if(boardCell.getOwner() == Owners.PLAYER_1) {
             color = new Color(0x66CCFF);
         }
-        else if(boardCell.getOwner() == TTCell.PURPLE_PLAYER) {
+        else if(boardCell.getOwner() == Owners.PLAYER_2) {
             color = new Color(0xBD9CF8);
         }
         else {

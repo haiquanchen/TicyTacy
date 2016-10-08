@@ -15,6 +15,12 @@ package net.flutterflies.ticytacy.board;
  */
 public class TTCell {
 
+    public enum Owners {
+        PLAYER_1,
+        PLAYER_2,
+        NO_PLAYER
+    }
+
     /**
      * A number representing an owner of No player.
      */
@@ -37,14 +43,14 @@ public class TTCell {
     /**
      * The owner of this cell
      */
-    private int owner;
+    private Owners owner;
 
     /**
      * Construct a new instance of the cell setting the owner to
      * No player.
      */
     public TTCell() {
-        this(NO_PLAYER);
+        this(Owners.NO_PLAYER);
     }
 
     /**
@@ -53,7 +59,7 @@ public class TTCell {
      *
      * @param owner The owner of the cell.
      */
-    public TTCell(int owner) {
+    public TTCell(Owners owner) {
         this.owner = owner;
     }
 
@@ -62,7 +68,7 @@ public class TTCell {
      *
      * @param owner The new cell owner.
      */
-    void setOwner(int owner) {
+    void setOwner(Owners owner) {
         this.owner = owner;
     }
 
@@ -71,7 +77,7 @@ public class TTCell {
      *
      * @return The cell owner.
      */
-    public int getOwner() {
+    public Owners getOwner() {
         return owner;
     }
 }

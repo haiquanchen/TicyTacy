@@ -9,6 +9,7 @@ package net.flutterflies.ticytacy.board;
 
 import net.flutterflies.ticytacy.board.init.ITTInitializer;
 import net.flutterflies.ticytacy.board.init.TTBlankInitializer;
+import net.flutterflies.ticytacy.board.TTCell.Owners;
 
 /**
  * Class used to represent a Ticy Tacy game board.
@@ -90,11 +91,11 @@ public class TTBoard {
      * @param cellJ    The horizontal placement of the cell to update.
      * @param newOwner The new owner of the cell.
      */
-    public void updateBoard(int cellI, int cellJ, int newOwner) {
+    public void updateBoard(int cellI, int cellJ, Owners newOwner) {
         blueCells = 0;
         purpleCells = 0;
 
-        if(newOwner != TTCell.NO_PLAYER) {
+        if(!newOwner.equals(Owners.NO_PLAYER)) {
             turnNumber++;
         }
 
@@ -111,39 +112,39 @@ public class TTBoard {
      * @param playerToCheck The player to check the win condition for.
      * @return True if a player has won.
      */
-    public boolean checkWinCondition(int playerToCheck) {
+    public boolean checkWinCondition(Owners playerToCheck) {
         boolean hasWon = false;
 
         //Top row
-        if(getCell(0, 0).getOwner() == playerToCheck && getCell(0, 1).getOwner() == playerToCheck && getCell(0, 2).getOwner() == playerToCheck) {
+        if(getCell(0, 0).getOwner().equals(playerToCheck) && getCell(0, 1).getOwner().equals(playerToCheck) && getCell(0, 2).getOwner().equals(playerToCheck)) {
             hasWon = true;
         }
         //Center Row
-        else if(getCell(1, 0).getOwner() == playerToCheck && getCell(1, 1).getOwner() == playerToCheck && getCell(1, 2).getOwner() == playerToCheck) {
+        else if(getCell(1, 0).getOwner().equals(playerToCheck) && getCell(1, 1).getOwner().equals(playerToCheck) && getCell(1, 2).getOwner().equals(playerToCheck)) {
             hasWon = true;
         }
         //Bottom Row
-        else if(getCell(2, 0).getOwner() == playerToCheck && getCell(2, 1).getOwner() == playerToCheck && getCell(2, 2).getOwner() == playerToCheck) {
+        else if(getCell(2, 0).getOwner().equals(playerToCheck) && getCell(2, 1).getOwner().equals(playerToCheck) && getCell(2, 2).getOwner().equals(playerToCheck)) {
             hasWon = true;
         }
         //Left Column
-        else if(getCell(0, 0).getOwner() == playerToCheck && getCell(1, 0).getOwner() == playerToCheck && getCell(2, 0).getOwner() == playerToCheck) {
+        else if(getCell(0, 0).getOwner().equals(playerToCheck) && getCell(1, 0).getOwner().equals(playerToCheck) && getCell(2, 0).getOwner().equals(playerToCheck)) {
             hasWon = true;
         }
         //Center Column
-        else if(getCell(0, 1).getOwner() == playerToCheck && getCell(1, 1).getOwner() == playerToCheck && getCell(2, 1).getOwner() == playerToCheck) {
+        else if(getCell(0, 1).getOwner().equals(playerToCheck) && getCell(1, 1).getOwner().equals(playerToCheck) && getCell(2, 1).getOwner().equals(playerToCheck)) {
             hasWon = true;
         }
-        //Bottom Row
-        else if(getCell(0, 2).getOwner() == playerToCheck && getCell(1, 2).getOwner() == playerToCheck && getCell(2, 2).getOwner() == playerToCheck) {
+        //Right Column
+        else if(getCell(0, 2).getOwner().equals(playerToCheck) && getCell(1, 2).getOwner().equals(playerToCheck) && getCell(2, 2).getOwner().equals(playerToCheck)) {
             hasWon = true;
         }
         //Top left -> Bottom right
-        else if(getCell(0, 0).getOwner() == playerToCheck && getCell(1, 1).getOwner() == playerToCheck && getCell(2, 2).getOwner() == playerToCheck) {
+        else if(getCell(0, 0).getOwner().equals(playerToCheck) && getCell(1, 1).getOwner().equals(playerToCheck) && getCell(2, 2).getOwner().equals(playerToCheck)) {
             hasWon = true;
         }
         //Top right -> Bottom left
-        else if(getCell(0, 2).getOwner() == playerToCheck && getCell(1, 1).getOwner() == playerToCheck && getCell(2, 0).getOwner() == playerToCheck) {
+        else if(getCell(0, 2).getOwner().equals(playerToCheck) && getCell(1, 1).getOwner().equals(playerToCheck) && getCell(2, 0).getOwner().equals(playerToCheck)) {
             hasWon = true;
         }
 
@@ -159,10 +160,10 @@ public class TTBoard {
 
         for(int i = 0; i < getSize(); i++) {
             for(int j = 0; j < getSize(); j++) {
-                if(getCell(i, j).getOwner() == TTCell.BLUE_PLAYER) {
+                if(getCell(i, j).getOwner() == Owners.PLAYER_1) {
                     blueCells++;
                 }
-                else if(getCell(i, j).getOwner() == TTCell.PURPLE_PLAYER) {
+                else if(getCell(i, j).getOwner() == Owners.PLAYER_2) {
                     purpleCells++;
                 }
             }

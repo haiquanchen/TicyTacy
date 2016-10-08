@@ -8,6 +8,7 @@
 package net.flutterflies.ticytacy.board.init;
 
 import net.flutterflies.ticytacy.board.TTCell;
+import net.flutterflies.ticytacy.board.TTCell.Owners;
 
 /**
  * Class containing an implementation of {@link ITTInitializer}.
@@ -45,8 +46,8 @@ public class TTOppositeInitializer extends TTBlankInitializer {
     public TTCell[][] initBoard() {
         TTCell[][] board = super.initBoard();
 
-        board[0][0] = new TTCell(TTCell.BLUE_PLAYER);
-        board[2][2] = new TTCell(TTCell.PURPLE_PLAYER);
+        board[0][0] = new TTCell(Owners.PLAYER_1);
+        board[2][2] = new TTCell(Owners.PLAYER_2);
 
         return board;
     }

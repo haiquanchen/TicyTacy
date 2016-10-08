@@ -8,6 +8,7 @@
 package net.flutterflies.ticytacy.board.init;
 
 import net.flutterflies.ticytacy.board.TTCell;
+import net.flutterflies.ticytacy.board.TTCell.Owners;
 
 /**
  * Class containing an implementation of {@link ITTInitializer}.
@@ -45,15 +46,15 @@ public class TTCrossInitializer implements ITTInitializer {
     public TTCell[][] initBoard() {
         TTCell[][] board = new TTCell[3][3];
 
-        board[0][0] = new TTCell(TTCell.BLUE_PLAYER);
-        board[0][1] = new TTCell(TTCell.NO_PLAYER);
-        board[0][2] = new TTCell(TTCell.PURPLE_PLAYER);
-        board[1][0] = new TTCell(TTCell.PURPLE_PLAYER);
-        board[1][1] = new TTCell(TTCell.NO_PLAYER);
-        board[1][2] = new TTCell(TTCell.BLUE_PLAYER);
-        board[2][0] = new TTCell(TTCell.BLUE_PLAYER);
-        board[2][1] = new TTCell(TTCell.NO_PLAYER);
-        board[2][2] = new TTCell(TTCell.PURPLE_PLAYER);
+        board[0][0] = new TTCell(Owners.PLAYER_1);
+        board[0][1] = new TTCell(Owners.NO_PLAYER);
+        board[0][2] = new TTCell(Owners.PLAYER_2);
+        board[1][0] = new TTCell(Owners.PLAYER_2);
+        board[1][1] = new TTCell(Owners.NO_PLAYER);
+        board[1][2] = new TTCell(Owners.PLAYER_1);
+        board[2][0] = new TTCell(Owners.PLAYER_1);
+        board[2][1] = new TTCell(Owners.NO_PLAYER);
+        board[2][2] = new TTCell(Owners.PLAYER_2);
 
         return board;
     }
