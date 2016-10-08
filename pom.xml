@@ -6,7 +6,7 @@
 
     <groupId>TicyTacy</groupId>
     <artifactId>net.flutterflies.ticytacy</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <name>Ticy Tacy</name>
     <description>A Slight variation on the classic game Tic-Tac-Toe.</description>
 

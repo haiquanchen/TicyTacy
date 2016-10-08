@@ -23,7 +23,7 @@ import java.util.List;
  * and the game display.
  *
  * @author Ashrynn Macke | Flutterflies
- * @version 0.1.0 (07.08.2016)
+ * @version 0.2.0 (08.10.2016)
  */
 public class TicyTacy {
 
