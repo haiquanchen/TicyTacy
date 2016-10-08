@@ -30,6 +30,7 @@ public class TTBlankInitializer implements ITTInitializer {
      *
      * @return The 3x3 grid of initialized cells.
      */
+    @Override
     public TTCell[][] initBoard() {
         TTCell[][] board = new TTCell[3][3];
 
