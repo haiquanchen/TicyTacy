@@ -62,11 +62,13 @@ public class TTBoard {
      *                    the board.
      */
     public TTBoard(ITTInitializer initParam) {
-        initializer = initParam;
-        board = initializer.initBoard();
         turnNumber = 1;
         blueCells = 0;
         purpleCells = 0;
+
+        initializer = initParam;
+        board = initializer.initBoard();
+        updateCellCount();
     }
 
     /**
@@ -78,6 +80,7 @@ public class TTBoard {
         purpleCells = 0;
 
         board = initializer.initBoard();
+        updateCellCount();
     }
 
     /**
@@ -97,16 +100,7 @@ public class TTBoard {
 
         board[cellI][cellJ].setOwner(newOwner);
 
-        for(int i = 0; i < getSize(); i++) {
-            for(int j = 0; j < getSize(); j++) {
-                if(getCell(i, j).getOwner() == TTCell.BLUE_PLAYER) {
-                    blueCells++;
-                }
-                else if(getCell(i, j).getOwner() == TTCell.PURPLE_PLAYER) {
-                    purpleCells++;
-                }
-            }
-        }
+        updateCellCount();
     }
 
     /**
@@ -154,6 +148,25 @@ public class TTBoard {
         }
 
         return hasWon;
+    }
+
+    /**
+     * Updates the current count of how many cells each player owns
+     */
+    private void updateCellCount() {
+        blueCells = 0;
+        purpleCells = 0;
+
+        for(int i = 0; i < getSize(); i++) {
+            for(int j = 0; j < getSize(); j++) {
+                if(getCell(i, j).getOwner() == TTCell.BLUE_PLAYER) {
+                    blueCells++;
+                }
+                else if(getCell(i, j).getOwner() == TTCell.PURPLE_PLAYER) {
+                    purpleCells++;
+                }
+            }
+        }
     }
 
     /**
