@@ -8,7 +8,7 @@
 package net.flutterflies.ticytacy.listeners;
 
 import net.flutterflies.ticytacy.TicyTacy;
-import net.flutterflies.ticytacy.board.TTCell;
+import net.flutterflies.ticytacy.board.TTCell.Owners;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -50,31 +50,34 @@ public class TTListener implements ActionListener {
         String[] cords = clickedButton.getName().split(",");
         int i = Integer.parseInt(cords[0]);
         int j = Integer.parseInt(cords[1]);
-        int currentCellOwner = ticyTacy.getBoard().getCell(i, j).getOwner();
-        int turnPlayer = ticyTacy.getBoard().getTurnNumber() % 2;
+        Owners currentCellOwner = ticyTacy.getBoard().getCell(i, j).getOwner();
+        Owners player;
         boolean hasWon = false;
 
-        if(turnPlayer == 1) {
-            onBlue(i, j, currentCellOwner);
-            if(ticyTacy.getBoard().getBlueCells() == 3) {
-                hasWon = ticyTacy.getBoard().checkWinCondition(TTCell.BLUE_PLAYER);
+        //If the current turn number is odd, then it is player 1's turn
+        if(ticyTacy.getBoard().getTurnNumber() % 2 == 1) {
+            player = Owners.PLAYER_1;
+            onPlayer1(i, j, currentCellOwner);
+            if(ticyTacy.getBoard().getPlayer1Cells() == 3) {
+                hasWon = ticyTacy.getBoard().checkWinCondition(Owners.PLAYER_1);
             }
         }
         else {
-            onPurple(i, j, currentCellOwner);
-            if(ticyTacy.getBoard().getPurpleCells() == 3) {
-                hasWon = ticyTacy.getBoard().checkWinCondition(TTCell.PURPLE_PLAYER);
+            player = Owners.PLAYER_2;
+            onPlayer2(i, j, currentCellOwner);
+            if(ticyTacy.getBoard().getPlayer2Cells() == 3) {
+                hasWon = ticyTacy.getBoard().checkWinCondition(Owners.PLAYER_2);
             }
         }
 
         ticyTacy.getDisplay().updateBoardDisplay(ticyTacy.getBoard());
         if(hasWon) {
-            displayWin(turnPlayer);
+            displayWin(player);
         }
     }
 
     /**
-     * If a button was pressed on the Blue player's turn then
+     * If a button was pressed on Player 1's turn then
      * this method is called. checks the button that was clicked
      * and updates the board accordingly for the next round.
      *
@@ -82,20 +85,20 @@ public class TTListener implements ActionListener {
      * @param j                The horizontal coordinate of the clicked cell.
      * @param currentCellOwner The current owner of the clicked cell.
      */
-    private void onBlue(int i, int j, int currentCellOwner) {
-        if(currentCellOwner == TTCell.PURPLE_PLAYER) {
+    private void onPlayer1(int i, int j, Owners currentCellOwner) {
+        if(currentCellOwner == Owners.PLAYER_2) {
             JOptionPane.showMessageDialog(
                     ticyTacy.getDisplay(),
-                    "You cannot claim that cell, it is owned by the purple player.",
+                    "You cannot claim that cell, it is owned by player 2.",
                     "Whoopsie",
                     JOptionPane.WARNING_MESSAGE
             );
         }
-        else if(currentCellOwner == TTCell.BLUE_PLAYER) {
-            ticyTacy.getBoard().updateBoard(i, j, TTCell.NO_PLAYER);
+        else if(currentCellOwner == Owners.PLAYER_1) {
+            ticyTacy.getBoard().updateBoard(i, j, Owners.NO_PLAYER);
         }
         else {
-            if(ticyTacy.getBoard().getBlueCells() == 3) {
+            if(ticyTacy.getBoard().getPlayer1Cells() == 3) {
                 JOptionPane.showMessageDialog(
                         ticyTacy.getDisplay(),
                         "You cannot claim more than three (3) cells at a time.",
@@ -104,13 +107,13 @@ public class TTListener implements ActionListener {
                 );
             }
             else {
-                ticyTacy.getBoard().updateBoard(i, j, TTCell.BLUE_PLAYER);
+                ticyTacy.getBoard().updateBoard(i, j, Owners.PLAYER_1);
             }
         }
     }
 
     /**
-     * If a button was pressed on the Purple player's turn then
+     * If a button was pressed on Player 2's turn then
      * this method is called. checks the button that was clicked
      * and updates the board accordingly for the next round.
      *
@@ -118,20 +121,20 @@ public class TTListener implements ActionListener {
      * @param j                The horizontal coordinate of the clicked cell.
      * @param currentCellOwner The current owner of the clicked cell.
      */
-    private void onPurple(int i, int j, int currentCellOwner) {
-        if(currentCellOwner == TTCell.BLUE_PLAYER) {
+    private void onPlayer2(int i, int j, Owners currentCellOwner) {
+        if(currentCellOwner == Owners.PLAYER_1) {
             JOptionPane.showMessageDialog(
                     ticyTacy.getDisplay(),
-                    "You cannot claim that cell, it is owned by the blue player.",
+                    "You cannot claim that cell, it is owned by player 1.",
                     "Whoopsie",
                     JOptionPane.WARNING_MESSAGE
             );
         }
-        else if(currentCellOwner == TTCell.PURPLE_PLAYER) {
-            ticyTacy.getBoard().updateBoard(i, j, TTCell.NO_PLAYER);
+        else if(currentCellOwner == Owners.PLAYER_2) {
+            ticyTacy.getBoard().updateBoard(i, j, Owners.NO_PLAYER);
         }
         else {
-            if(ticyTacy.getBoard().getPurpleCells() == 3) {
+            if(ticyTacy.getBoard().getPlayer2Cells() == 3) {
                 JOptionPane.showMessageDialog(
                         ticyTacy.getDisplay(),
                         "You cannot claim more than three (3) cells at a time.",
@@ -140,7 +143,7 @@ public class TTListener implements ActionListener {
                 );
             }
             else {
-                ticyTacy.getBoard().updateBoard(i, j, TTCell.PURPLE_PLAYER);
+                ticyTacy.getBoard().updateBoard(i, j, Owners.PLAYER_2);
             }
         }
     }
@@ -150,10 +153,10 @@ public class TTListener implements ActionListener {
      *
      * @param player that player that won.
      */
-    private void displayWin(int player) {
-        String winMessage = "The ${PLAYER} player has won the game!\nWould you like to play again?";
+    private void displayWin(Owners player) {
+        String winMessage = "Player ${PLAYER} has won the game!\nWould you like to play again?";
 
-        winMessage = winMessage.replace("${PLAYER}", player == TTCell.BLUE_PLAYER ? "Blue" : "Purple");
+        winMessage = winMessage.replace("${PLAYER}", player.equals(Owners.PLAYER_1) ? "1" : "2");
 
         int choice = JOptionPane.showConfirmDialog(
                 ticyTacy.getDisplay(),

@@ -8,6 +8,7 @@
 package net.flutterflies.ticytacy.board.init;
 
 import net.flutterflies.ticytacy.board.TTCell;
+import net.flutterflies.ticytacy.board.TTCell.Owners;
 
 import java.util.Random;
 
@@ -53,8 +54,8 @@ public class TTRandomInitializer extends TTBlankInitializer {
             int i = random.nextInt(3);
             int j = random.nextInt(3);
 
-            if(board[i][j].getOwner() == TTCell.NO_PLAYER) {
-                board[i][j] = new TTCell(TTCell.PURPLE_PLAYER);
+            if(board[i][j].getOwner() == Owners.NO_PLAYER) {
+                board[i][j] = new TTCell(Owners.PLAYER_1);
                 player1Cells++;
             }
 
@@ -65,8 +66,8 @@ public class TTRandomInitializer extends TTBlankInitializer {
             int i = random.nextInt(3);
             int j = random.nextInt(3);
 
-            if(board[i][j].getOwner() == TTCell.NO_PLAYER) {
-                board[i][j] = new TTCell(TTCell.BLUE_PLAYER);
+            if(board[i][j].getOwner() == Owners.NO_PLAYER) {
+                board[i][j] = new TTCell(Owners.PLAYER_2);
                 player2Cells++;
             }
         }
