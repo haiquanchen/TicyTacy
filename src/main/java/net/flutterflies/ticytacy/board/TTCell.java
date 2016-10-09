@@ -22,25 +22,6 @@ public class TTCell {
     }
 
     /**
-     * A number representing an owner of No player.
-     */
-    public static final int NO_PLAYER = 2;
-
-    /**
-     * A number representing the Blue player.
-     */
-    public static final int BLUE_PLAYER = 1;
-
-    /**
-     * A number representing the Purple player.
-     */
-    public static final int PURPLE_PLAYER = 0;
-
-    //
-    //------------------------------------------------//
-    //
-
-    /**
      * The owner of this cell
      */
     private Owners owner;

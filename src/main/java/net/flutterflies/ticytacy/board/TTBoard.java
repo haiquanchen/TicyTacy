@@ -31,20 +31,20 @@ public class TTBoard {
 
     /**
      * The current turn number, an odd turn number represents
-     * that is is the blue player's turn, and even turn number
-     * represents that it is the purple player's turn.
+     * that it is player 1's turn, and even turn number
+     * represents that it is player 2's turn.
      */
     private int turnNumber;
 
     /**
-     * The current number of blue cells on the board.
+     * The current number of cells owned by player 1 on the board.
      */
-    private int blueCells;
+    private int player1Cells;
 
     /**
-     * The current number of purple cells on the board.
+     * The current number of cells owned by player 2 on the board.
      */
-    private int purpleCells;
+    private int player2Cells;
 
     /**
      * Construct a new instance of the Ticy Tacy Board with a
@@ -64,8 +64,8 @@ public class TTBoard {
      */
     public TTBoard(ITTInitializer initParam) {
         turnNumber = 1;
-        blueCells = 0;
-        purpleCells = 0;
+        player1Cells = 0;
+        player2Cells = 0;
 
         initializer = initParam;
         board = initializer.initBoard();
@@ -77,8 +77,8 @@ public class TTBoard {
      */
     public void reset() {
         turnNumber = 1;
-        blueCells = 0;
-        purpleCells = 0;
+        player1Cells = 0;
+        player2Cells = 0;
 
         board = initializer.initBoard();
         updateCellCount();
@@ -92,8 +92,8 @@ public class TTBoard {
      * @param newOwner The new owner of the cell.
      */
     public void updateBoard(int cellI, int cellJ, Owners newOwner) {
-        blueCells = 0;
-        purpleCells = 0;
+        player1Cells = 0;
+        player2Cells = 0;
 
         if(!newOwner.equals(Owners.NO_PLAYER)) {
             turnNumber++;
@@ -155,16 +155,16 @@ public class TTBoard {
      * Updates the current count of how many cells each player owns
      */
     private void updateCellCount() {
-        blueCells = 0;
-        purpleCells = 0;
+        player1Cells = 0;
+        player2Cells = 0;
 
         for(int i = 0; i < getSize(); i++) {
             for(int j = 0; j < getSize(); j++) {
                 if(getCell(i, j).getOwner() == Owners.PLAYER_1) {
-                    blueCells++;
+                    player1Cells++;
                 }
                 else if(getCell(i, j).getOwner() == Owners.PLAYER_2) {
-                    purpleCells++;
+                    player2Cells++;
                 }
             }
         }
@@ -192,21 +192,21 @@ public class TTBoard {
     }
 
     /**
-     * Get the number of blue cells present in the game board.
+     * Get the number of cells owned by player 1 present in the game board.
      *
-     * @return The number of blue cells.
+     * @return The number of cells owned by player 1.
      */
-    public int getBlueCells() {
-        return blueCells;
+    public int getPlayer1Cells() {
+        return player1Cells;
     }
 
     /**
-     * Get the number of purple cells present in the game board.
+     * Get the number of cells owned by player 2 present in the game board.
      *
-     * @return The number of purple cells.
+     * @return The number of cells owned by player 2.
      */
-    public int getPurpleCells() {
-        return purpleCells;
+    public int getPlayer2Cells() {
+        return player2Cells;
     }
 
     /**

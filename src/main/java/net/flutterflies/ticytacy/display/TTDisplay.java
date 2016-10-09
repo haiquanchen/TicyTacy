@@ -79,33 +79,30 @@ public class TTDisplay extends JFrame {
     }
 
     /**
-     * MAke the meta panel for the board. this panel contains information like
+     * Make the meta panel for the board. this panel contains information like
      * the turn number, the number of cells each player has, and which players turn it is.
      *
      * @param board the current instance of the Game board.
      */
     private void makeBoardMeta(TTBoard board) {
         JLabel turnNumber = new JLabel();
-        JLabel blueCells = new JLabel();
-        JLabel purpleCells = new JLabel();
+        JLabel player1Cells = new JLabel();
+        JLabel player2Cells = new JLabel();
 
         metaPanel.removeAll();
         metaPanel.setLayout(new BoxLayout(metaPanel, BoxLayout.Y_AXIS));
         metaPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        if((board.getTurnNumber() % 2) == 1)
-            turnNumber.setText("Current Turn: Blue");
-        else
-            turnNumber.setText("Current Turn: Purple");
+        turnNumber.setText("Current turn: Player " + (board.getTurnNumber() % 2 == 1 ? "1" : "2"));
         turnNumber.setAlignmentX(Component.CENTER_ALIGNMENT);
-        blueCells.setText("Blue Cells: " + board.getBlueCells());
-        blueCells.setAlignmentX(Component.CENTER_ALIGNMENT);
-        purpleCells.setText("Purple Cells: " + board.getPurpleCells());
-        purpleCells.setAlignmentX(Component.CENTER_ALIGNMENT);
+        player1Cells.setText("Player 1's Cells: " + board.getPlayer1Cells());
+        player1Cells.setAlignmentX(Component.CENTER_ALIGNMENT);
+        player2Cells.setText("Player 2's Cells: " + board.getPlayer2Cells());
+        player2Cells.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         metaPanel.add(turnNumber);
-        metaPanel.add(blueCells);
-        metaPanel.add(purpleCells);
+        metaPanel.add(player1Cells);
+        metaPanel.add(player2Cells);
     }
 
     /**
