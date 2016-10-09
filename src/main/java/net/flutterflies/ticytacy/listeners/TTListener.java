@@ -27,6 +27,8 @@ public class TTListener implements ActionListener {
      * other parts of the program.
      */
     private final TicyTacy ticyTacy;
+    private static int uncheckBlue = 0;
+    private static int uncheckPurple = 0;
 
     /**
      * Construct a new instance of the TTListener.
@@ -92,7 +94,20 @@ public class TTListener implements ActionListener {
             );
         }
         else if(currentCellOwner == TTCell.BLUE_PLAYER) {
-            ticyTacy.getBoard().updateBoard(i, j, TTCell.NO_PLAYER);
+            if(uncheckBlue == 0)
+            {
+                ticyTacy.getBoard().updateBoard(i, j, TTCell.NO_PLAYER);
+                uncheckBlue = 1;
+            }
+            else{
+                JOptionPane.showMessageDialog(
+                    ticyTacy.getDisplay(),
+                    "You cannot unclaim more than one cell.",
+                    "Whoopsie",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            }
+            
         }
         else {
             if(ticyTacy.getBoard().getBlueCells() == 3) {
@@ -105,6 +120,7 @@ public class TTListener implements ActionListener {
             }
             else {
                 ticyTacy.getBoard().updateBoard(i, j, TTCell.BLUE_PLAYER);
+                uncheckBlue = 0;
             }
         }
     }
@@ -128,7 +144,20 @@ public class TTListener implements ActionListener {
             );
         }
         else if(currentCellOwner == TTCell.PURPLE_PLAYER) {
-            ticyTacy.getBoard().updateBoard(i, j, TTCell.NO_PLAYER);
+            if(uncheckPurple == 0)
+            {
+                ticyTacy.getBoard().updateBoard(i, j, TTCell.NO_PLAYER);
+                uncheckPurple = 1;
+            }
+            else{
+                JOptionPane.showMessageDialog(
+                    ticyTacy.getDisplay(),
+                    "You cannot unclaim more than one cell.",
+                    "Whoopsie",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            }
+            
         }
         else {
             if(ticyTacy.getBoard().getPurpleCells() == 3) {
@@ -141,6 +170,7 @@ public class TTListener implements ActionListener {
             }
             else {
                 ticyTacy.getBoard().updateBoard(i, j, TTCell.PURPLE_PLAYER);
+                uncheckPurple = 0;
             }
         }
     }
