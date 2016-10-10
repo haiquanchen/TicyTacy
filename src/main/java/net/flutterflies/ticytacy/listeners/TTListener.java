@@ -29,6 +29,11 @@ public class TTListener implements ActionListener {
     private final TicyTacy ticyTacy;
 
     /**
+     * Whether or not the player has unclaimed a cell this turn.
+     */
+    private boolean hasUnclaimed = false;
+
+    /**
      * Construct a new instance of the TTListener.
      *
      * @param ticyTacy The instance of the main program class.
@@ -95,7 +100,18 @@ public class TTListener implements ActionListener {
             );
         }
         else if(currentCellOwner == Owners.PLAYER_1) {
-            ticyTacy.getBoard().updateBoard(i, j, Owners.NO_PLAYER);
+            if(!hasUnclaimed) {
+                ticyTacy.getBoard().updateBoard(i, j, Owners.NO_PLAYER);
+                hasUnclaimed = true;
+            }
+            else {
+                JOptionPane.showMessageDialog(
+                        ticyTacy.getDisplay(),
+                        "You can only unclaim one cell per turn.",
+                        "Whoopsie",
+                        JOptionPane.WARNING_MESSAGE
+                );
+            }
         }
         else {
             if(ticyTacy.getBoard().getPlayer1Cells() == 3) {
@@ -108,6 +124,7 @@ public class TTListener implements ActionListener {
             }
             else {
                 ticyTacy.getBoard().updateBoard(i, j, Owners.PLAYER_1);
+                hasUnclaimed = false;
             }
         }
     }
@@ -131,7 +148,18 @@ public class TTListener implements ActionListener {
             );
         }
         else if(currentCellOwner == Owners.PLAYER_2) {
-            ticyTacy.getBoard().updateBoard(i, j, Owners.NO_PLAYER);
+            if(!hasUnclaimed) {
+                ticyTacy.getBoard().updateBoard(i, j, Owners.NO_PLAYER);
+                hasUnclaimed = true;
+            }
+            else {
+                JOptionPane.showMessageDialog(
+                        ticyTacy.getDisplay(),
+                        "You can only unclaim one cell per turn.",
+                        "Whoopsie",
+                        JOptionPane.WARNING_MESSAGE
+                );
+            }
         }
         else {
             if(ticyTacy.getBoard().getPlayer2Cells() == 3) {
@@ -144,6 +172,7 @@ public class TTListener implements ActionListener {
             }
             else {
                 ticyTacy.getBoard().updateBoard(i, j, Owners.PLAYER_2);
+                hasUnclaimed = false;
             }
         }
     }
